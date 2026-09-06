@@ -1,0 +1,83 @@
+{
+  "name": "@yourname/security-guard",
+  "version": "1.0.0",
+  "description": "Client-side DevTools detection and anti-inspection security SDK for web applications",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./detectors": {
+      "import": {
+        "types": "./dist/detectors/index.d.ts",
+        "default": "./dist/detectors/index.js"
+      },
+      "require": {
+        "types": "./dist/detectors/index.d.cts",
+        "default": "./dist/detectors/index.cjs"
+      }
+    },
+    "./scoring": {
+      "import": {
+        "types": "./dist/scoring.d.ts",
+        "default": "./dist/scoring.js"
+      },
+      "require": {
+        "types": "./dist/scoring.d.cts",
+        "default": "./dist/scoring.cjs"
+      }
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT",
+  "keywords": [
+    "security",
+    "devtools",
+    "monitoring",
+    "typescript",
+    "browser",
+    "ssr"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . && npm run typecheck",
+    "demo": "vite --host 127.0.0.1",
+    "demo:build": "vite build",
+    "prepack": "npm run build"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.39.1",
+    "@types/node": "22.18.6",
+    "eslint": "9.39.1",
+    "jsdom": "26.1.0",
+    "tsup": "8.5.0",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.46.1",
+    "vite": "6.4.3",
+    "vitest": "3.2.6"
+  }
+}

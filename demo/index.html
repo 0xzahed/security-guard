@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Explore SecurityGuard's privacy-aware, multi-signal browser inspection monitoring." />
+    <title>SecurityGuard — Signal Console</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="SecurityGuard home"><span class="brand-mark" aria-hidden="true">S</span> SecurityGuard<span class="version">v1.0</span></a>
+        <span class="local-label"><span class="dot"></span> LOCAL SESSION · NO TELEMETRY</span>
+      </header>
+      <main>
+        <section class="intro">
+          <div><p class="eyebrow">CLIENT-SIDE SECURITY OBSERVABILITY</p><h1>SecurityGuard Demo<span class="accent">.</span></h1><p class="lede">Understand the signals. Control the response.<br />A conservative inspection monitor, not a security boundary.</p></div>
+          <div class="environment"><span>BROWSER RUNTIME</span><strong id="runtime">Ready to initialize</strong><small>Zero runtime dependencies · SSR safe</small></div>
+        </section>
+        <div class="dashboard">
+          <section class="panel monitor" aria-labelledby="monitor-title">
+            <div class="panel-heading"><h2 id="monitor-title">Live monitoring</h2><span class="pill" id="lifecycle">Stopped</span></div>
+            <div class="monitor-body">
+              <div class="score-ring" id="score-ring"><div><strong id="score">0<span>%</span></strong><span>CONFIDENCE SCORE</span></div></div>
+              <div class="state-block"><p class="eyebrow">CURRENT STATUS</p><h3 id="state" role="status">Normal</h3><p id="state-detail">Start a local session to observe browser signals.</p><div class="threshold"><span>Confirmation threshold</span><strong id="threshold">60 / 100</strong></div><p class="fineprint">A heuristic score, not a probability.<br />Two independent evidence categories are required.</p></div>
+            </div>
+            <div class="toolbar" aria-label="Guard controls"><button class="primary" id="start">Start Guard</button><button id="stop" disabled>Stop Guard</button><button id="pause" disabled>Pause</button><button id="resume" disabled>Resume</button><button class="text-button" id="reset">Reset</button></div>
+          </section>
+          <section class="panel configuration" aria-labelledby="config-title">
+            <div class="panel-heading"><h2 id="config-title">Configuration</h2><span class="panel-index">01</span></div>
+            <div class="config-body"><label for="sensitivity">Sensitivity</label><select id="sensitivity"><option value="low">Low — extra cautious</option><option value="medium" selected>Medium — recommended</option><option value="high">High — more responsive</option></select><label for="action">Response action</label><select id="action"><option value="overlay">Overlay</option><option value="block">Block interaction</option><option value="callback">Callback only</option><option value="redirect">Redirect locally</option></select><label class="toggle"><input id="debugger" type="checkbox" /><span>Enable debugger timing probe</span></label><p class="fineprint">Opt-in. An attached debugger may pause the page indefinitely. One probe at most every 15 seconds.</p><button class="preview-button" id="preview">Preview selected action</button><p class="fineprint preview-note">Preview is not a detection. Layers close after 6 seconds.</p></div>
+          </section>
+          <section class="panel signals" aria-labelledby="signals-title">
+            <div class="panel-heading"><h2 id="signals-title">Independent signals</h2><span class="panel-index">02</span></div>
+            <div class="signal-row" data-signal="dimension"><span class="signal-icon">D</span><div><h3>Window dimensions</h3><p>Stable viewport / window gap</p></div><span class="signal-state">Inactive</span><span class="weight">+20</span></div>
+            <div class="signal-row" data-signal="debugger"><span class="signal-icon">T</span><div><h3>Debugger timing</h3><p>Opt-in execution delay probe</p></div><span class="signal-state">Disabled</span><span class="weight">+40</span></div>
+            <div class="signal-row" data-signal="keyboard"><span class="signal-icon">K</span><div><h3>Inspection shortcuts</h3><p>Observed, never prevented</p></div><span class="signal-state">Inactive</span><span class="weight">+15</span></div>
+            <div class="signal-row" data-signal="behavior"><span class="signal-icon">B</span><div><h3>Browser behavior</h3><p>Foreground scheduling stalls</p></div><span class="signal-state">Inactive</span><span class="weight">+25</span></div>
+            <p class="signal-footer">Timing signals share a category. Only the strongest contributes.</p>
+          </section>
+          <section class="panel activity" aria-labelledby="activity-title"><div class="panel-heading"><h2 id="activity-title">Session activity</h2><span class="pill" id="event-count">0 events</span></div><ol id="activity" aria-label="Session events"><li class="empty-state">Your session starts here.<br /><span>Lifecycle changes and confirmed detections appear in this log.</span></li></ol></section>
+        </div>
+        <aside class="notice"><span class="notice-symbol" aria-hidden="true">i</span><div><strong>Visibility, not invincibility.</strong><p>Browsers have no official “DevTools is open” API. Resizing, sidebars, CPU load, and shortcuts can produce ambiguous signals. Determined users can bypass this SDK. Keep authentication and authorization on your server.</p></div></aside>
+        <section class="integration"><div><p class="eyebrow">SMALL SURFACE. SIMPLE INTEGRATION.</p><h2>One import. Your policy.</h2><p>Vanilla JS · React · Next.js · Vue · Angular</p></div><pre><code><span class="code-purple">import</span> SecurityGuard <span class="code-purple">from</span> <span class="code-green">'@yourname/security-guard'</span>;
+
+SecurityGuard.<span class="code-blue">start</span>({
+  devtools: <span class="code-purple">true</span>,
+  action: <span class="code-green">'overlay'</span>
+});</code></pre></section>
+      </main>
+      <footer><span>SecurityGuard / Signal Console</span><span>Built for transparency. Designed for restraint.</span></footer>
+    </div>
+    <script type="module" src="/demo.ts"></script>
+  </body>
+</html>
