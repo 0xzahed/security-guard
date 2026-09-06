@@ -3,126 +3,143 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="SecurityGuard — Client-side DevTools detection and anti-inspection security SDK for web applications. TypeScript-first, SSR-safe, zero runtime dependencies." />
-    <meta name="theme-color" content="#0b1016" />
-    <meta property="og:title" content="SecurityGuard — Client-side Anti-Inspection SDK" />
+    <meta name="description" content="SecurityGuard — Client-side DevTools detection and anti-inspection security SDK. TypeScript-first, SSR-safe, zero runtime dependencies." />
+    <meta name="theme-color" content="#0a0e14" />
+    <meta property="og:title" content="SecurityGuard — Client-Side Anti-Inspection SDK" />
     <meta property="og:description" content="Multi-signal DevTools detection with confidence scoring. TypeScript-first, SSR-safe, zero runtime dependencies." />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230b1016'/><text x='50' y='68' font-size='52' font-weight='bold' text-anchor='middle' fill='%239ce3c0' font-family='system-ui,sans-serif'>S</text></svg>" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%230a0e14'/><path d='M50 18 L78 32 L78 58 Q78 76 50 86 Q22 76 22 58 L22 32 Z' fill='none' stroke='%2364ffda' stroke-width='3'/><text x='50' y='62' font-size='32' font-weight='bold' text-anchor='middle' fill='%2364ffda' font-family='system-ui,sans-serif'>S</text></svg>" />
     <title>SecurityGuard — Client-Side Anti-Inspection SDK</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;550;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
-    <nav class="nav">
+    <!-- Animated background -->
+    <div class="bg-grid"></div>
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+
+    <!-- Nav -->
+    <nav class="nav" id="nav">
       <div class="nav-inner">
-        <a class="brand" href="/"><span class="brand-mark">S</span><span>SecurityGuard</span></a>
-        <div class="nav-links">
+        <a class="brand" href="/"><span class="brand-mark">S</span><span class="brand-text">SecurityGuard</span></a>
+        <div class="nav-links" id="nav-links">
           <a href="#features">Features</a>
           <a href="#signals">Detection</a>
           <a href="#actions">Actions</a>
           <a href="#code">Code</a>
-          <a href="#demo">Live Demo</a>
-          <a class="nav-cta" href="https://www.npmjs.com/package/@0xzahed/security-guard" target="_blank" rel="noopener">npm</a>
+          <a href="#demo">Demo</a>
+          <a class="nav-cta" href="https://www.npmjs.com/package/@0xzahed/security-guard" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L8 4l4 2 4-2-4-4zM0 8l4 4 2-4-2-4-4 4zm16 0l2 4 4-4-4-4-2 4zM12 14l-4 2 4 8 4-8-4-2z"/></svg> npm</a>
         </div>
-        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
       </div>
     </nav>
 
+    <!-- Hero -->
     <section class="hero">
-      <div class="hero-bg"></div>
       <div class="hero-content">
-        <p class="hero-badge"><span class="hero-badge-dot"></span> v1.0.0 · Published on npm</p>
+        <div class="hero-badge"><span class="hero-badge-dot"></span> v1.0.0 — Live on npm</div>
         <h1>Detect inspection.<br /><span class="hero-accent">Control your response.</span></h1>
         <p class="hero-sub">A lightweight, TypeScript-first SDK that combines multiple browser signals into a confidence score — then responds with configurable actions. SSR-safe, zero runtime dependencies, framework-independent.</p>
         <div class="hero-actions">
-          <a class="btn-primary" href="#demo">Try the live demo</a>
+          <a class="btn-primary" href="#demo"><span>Try the live demo</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
           <a class="btn-secondary" href="#code">View the code</a>
         </div>
         <div class="hero-stats">
-          <div><strong>~20KB</strong><span>minified</span></div>
-          <div><strong>0</strong><span>runtime deps</span></div>
-          <div><strong>4</strong><span>detectors</span></div>
-          <div><strong>72</strong><span>tests</span></div>
+          <div class="stat"><strong>~20<span class="stat-unit">KB</span></strong><span>minified</span></div>
+          <div class="stat-divider"></div>
+          <div class="stat"><strong>0</strong><span>runtime deps</span></div>
+          <div class="stat-divider"></div>
+          <div class="stat"><strong>4</strong><span>detectors</span></div>
+          <div class="stat-divider"></div>
+          <div class="stat"><strong>72</strong><span>tests</span></div>
         </div>
       </div>
     </section>
 
-    <section class="install" id="install">
-      <div class="container">
+    <!-- Install -->
+    <section class="install">
+      <div class="install-grid">
         <div class="install-card">
           <div class="install-label">INSTALL</div>
-          <div class="code-block"><span class="prompt">$</span> npm install @0xzahed/security-guard</div>
+          <div class="code-line"><span class="prompt">$</span> npm install @0xzahed/security-guard</div>
         </div>
         <div class="install-card">
           <div class="install-label">QUICK START</div>
-          <div class="code-block code-js"><span class="kw">import</span> SecurityGuard <span class="kw">from</span> <span class="str">'@0xzahed/security-guard'</span>;<br /><br />SecurityGuard.<span class="fn">start</span>({<br />&nbsp;&nbsp;devtools: <span class="kw">true</span>,<br />&nbsp;&nbsp;action: <span class="str">'overlay'</span><br />});</div>
+          <div class="code-line code-js"><span class="kw">import</span> SecurityGuard <span class="kw">from</span> <span class="str">'@0xzahed/security-guard'</span>;<br /><br />SecurityGuard.<span class="fn">start</span>({<br />&nbsp;&nbsp;devtools: <span class="kw">true</span>,<br />&nbsp;&nbsp;action: <span class="str">'overlay'</span><br />});</div>
         </div>
       </div>
     </section>
 
-    <section class="features" id="features">
+    <!-- Features -->
+    <section class="section features" id="features">
       <div class="container">
-        <p class="section-eyebrow">WHY SECURITYGUARD</p>
-        <h2 class="section-title">Built for restraint, not bravado.</h2>
+        <div class="section-header">
+          <p class="section-eyebrow">WHY SECURITYGUARD</p>
+          <h2 class="section-title">Built for restraint,<br />not bravado.</h2>
+        </div>
         <div class="feature-grid">
-          <div class="feature-card"><div class="feature-icon">⊞</div><h3>Multi-signal scoring</h3><p>Four independent detectors feed a centralized confidence engine. No single signal can trigger a response — at least two evidence categories must agree.</p></div>
-          <div class="feature-card"><div class="feature-icon">⏱</div><h3>Debounce & cooldown</h3><p>Detection requires sustained evidence across samples. Per-episode cooldown prevents repeat firing. Recovery debounce ensures stable clearing.</p></div>
-          <div class="feature-card"><div class="feature-icon">⇄</div><h3>SSR-safe by design</h3><p>No module-level browser access. <code>start()</code> becomes a controlled no-op on the server. Works in Next.js, React SSR, Vue, Nuxt, and Node.</p></div>
-          <div class="feature-card"><div class="feature-icon">◇</div><h3>Zero dependencies</h3><p>No runtime dependencies. Tree-shakable ESM with CJS fallback. TypeScript declarations included. Small enough to audit in an afternoon.</p></div>
-          <div class="feature-card"><div class="feature-icon">♿</div><h3>Accessible actions</h3><p>Overlay and block layers use native <code>&lt;dialog&gt;</code> with ARIA roles, focus containment, and keyboard handling. SPA state is preserved.</p></div>
-          <div class="feature-card"><div class="feature-icon">🔒</div><h3>Privacy-first reporting</h3><p>Optional backend reporting sends only a minimal whitelist. No cookies, tokens, form data, or paths by default. Non-blocking with timeout and abort.</p></div>
+          <div class="feature-card"><div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg></div><h3>Multi-signal scoring</h3><p>Four independent detectors feed a centralized confidence engine. No single signal can trigger a response — at least two evidence categories must agree.</p></div>
+          <div class="feature-card"><div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><h3>Debounce & cooldown</h3><p>Detection requires sustained evidence across samples. Per-episode cooldown prevents repeat firing. Recovery debounce ensures stable clearing.</p></div>
+          <div class="feature-card"><div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 11-9-9c2.5 0 4.8 1 6.4 2.6"/><path d="M21 3v6h-6"/></svg></div><h3>SSR-safe by design</h3><p>No module-level browser access. <code>start()</code> becomes a controlled no-op on the server. Works in Next.js, React SSR, Vue, Nuxt, and Node.</p></div>
+          <div class="feature-card"><div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div><h3>Zero dependencies</h3><p>No runtime dependencies. Tree-shakable ESM with CJS fallback. TypeScript declarations included. Small enough to audit in an afternoon.</p></div>
+          <div class="feature-card"><div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg></div><h3>Accessible actions</h3><p>Overlay and block layers use native <code>&lt;dialog&gt;</code> with ARIA roles, focus containment, and keyboard handling. SPA state is preserved.</p></div>
+          <div class="feature-card"><div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><h3>Privacy-first reporting</h3><p>Optional backend reporting sends only a minimal whitelist. No cookies, tokens, form data, or paths by default. Non-blocking with timeout and abort.</p></div>
         </div>
       </div>
     </section>
 
-    <section class="signals" id="signals">
+    <!-- Signals -->
+    <section class="section signals" id="signals">
       <div class="container">
-        <p class="section-eyebrow">DETECTION ENGINE</p>
-        <h2 class="section-title">Four signals. Three categories. One score.</h2>
-        <p class="section-sub">Each detector operates independently and returns structured data. The scorer combines them — but correlated signals share a category, so one browser pause can't count twice.</p>
+        <div class="section-header">
+          <p class="section-eyebrow">DETECTION ENGINE</p>
+          <h2 class="section-title">Four signals.<br />Three categories. One score.</h2>
+          <p class="section-sub">Each detector operates independently and returns structured data. The scorer combines them — but correlated signals share a category, so one browser pause can't count twice.</p>
+        </div>
         <div class="signals-grid">
-          <div class="signal-card"><div class="signal-header"><span class="signal-badge layout">LAYOUT</span><span class="signal-weight">+20</span></div><h3>Window dimensions</h3><p>Compares stable outer/inner window gaps. Suppresses evidence during resizing, mobile, zoom, and orientation changes.</p><div class="signal-fp"><strong>FP risk:</strong> Browser chrome, sidebars</div></div>
-          <div class="signal-card"><div class="signal-header"><span class="signal-badge timing">TIMING</span><span class="signal-weight">+40</span></div><h3>Debugger timing <span class="opt-in">opt-in</span></h3><p>Measures execution delay around a <code>debugger</code> statement. Rate-limited and disabled by default — an attached debugger can pause indefinitely.</p><div class="signal-fp"><strong>FP risk:</strong> GC, CPU contention</div></div>
-          <div class="signal-card"><div class="signal-header"><span class="signal-badge interaction">INTERACTION</span><span class="signal-weight">+15</span></div><h3>Keyboard shortcuts</h3><p>Observes F12, Ctrl+Shift+I/J/C, Cmd+Option+I/J/C. Never prevents default behavior. A shortcut is a signal, not proof.</p><div class="signal-fp"><strong>FP risk:</strong> Custom app shortcuts</div></div>
-          <div class="signal-card"><div class="signal-header"><span class="signal-badge timing">TIMING</span><span class="signal-weight">+25</span></div><h3>Browser behavior</h3><p>Foreground scheduling drift beyond expected intervals. Resets on focus/visibility changes. Delays over 10s are discarded as suspension.</p><div class="signal-fp"><strong>FP risk:</strong> Long tasks, CPU load</div></div>
+          <div class="signal-card"><div class="signal-top"><span class="signal-badge layout">LAYOUT</span><span class="signal-weight">+20</span></div><h3>Window dimensions</h3><p>Compares stable outer/inner window gaps. Suppresses evidence during resizing, mobile, zoom, and orientation changes.</p><div class="signal-fp"><strong>FP risk:</strong> Browser chrome, sidebars</div></div>
+          <div class="signal-card"><div class="signal-top"><span class="signal-badge timing">TIMING</span><span class="signal-weight">+40</span></div><h3>Debugger timing <span class="opt-in">opt-in</span></h3><p>Measures execution delay around a <code>debugger</code> statement. Rate-limited and disabled by default — an attached debugger can pause indefinitely.</p><div class="signal-fp"><strong>FP risk:</strong> GC, CPU contention</div></div>
+          <div class="signal-card"><div class="signal-top"><span class="signal-badge interaction">INTERACTION</span><span class="signal-weight">+15</span></div><h3>Keyboard shortcuts</h3><p>Observes F12, Ctrl+Shift+I/J/C, Cmd+Option+I/J/C. Never prevents default behavior. A shortcut is a signal, not proof.</p><div class="signal-fp"><strong>FP risk:</strong> Custom app shortcuts</div></div>
+          <div class="signal-card"><div class="signal-top"><span class="signal-badge timing">TIMING</span><span class="signal-weight">+25</span></div><h3>Browser behavior</h3><p>Foreground scheduling drift beyond expected intervals. Resets on focus/visibility changes. Delays over 10s are discarded as suspension.</p><div class="signal-fp"><strong>FP risk:</strong> Long tasks, CPU load</div></div>
         </div>
         <div class="scoring-flow">
-          <div class="flow-step"><span class="flow-num">1</span><span>Structured signals</span></div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-step"><span class="flow-num">2</span><span>Weight & score</span></div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-step"><span class="flow-num">3</span><span>Two categories required</span></div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-step"><span class="flow-num">4</span><span>Debounce + cooldown</span></div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-step flow-highlight"><span class="flow-num">5</span><span>Detection event</span></div>
-          <div class="flow-arrow">→</div>
+          <div class="flow-step"><span class="flow-num">1</span><span>Structured signals</span></div><div class="flow-arrow">→</div>
+          <div class="flow-step"><span class="flow-num">2</span><span>Weight & score</span></div><div class="flow-arrow">→</div>
+          <div class="flow-step"><span class="flow-num">3</span><span>Two categories required</span></div><div class="flow-arrow">→</div>
+          <div class="flow-step"><span class="flow-num">4</span><span>Debounce + cooldown</span></div><div class="flow-arrow">→</div>
+          <div class="flow-step flow-highlight"><span class="flow-num">5</span><span>Detection event</span></div><div class="flow-arrow">→</div>
           <div class="flow-step flow-highlight"><span class="flow-num">6</span><span>Configurable action</span></div>
         </div>
       </div>
     </section>
 
-    <section class="actions" id="actions">
+    <!-- Actions -->
+    <section class="section actions" id="actions">
       <div class="container">
-        <p class="section-eyebrow">RESPONSE ACTIONS</p>
-        <h2 class="section-title">Your policy, your response.</h2>
+        <div class="section-header">
+          <p class="section-eyebrow">RESPONSE ACTIONS</p>
+          <h2 class="section-title">Your policy,<br />your response.</h2>
+        </div>
         <div class="actions-grid">
-          <div class="action-card"><div class="action-visual action-overlay"><div class="action-mock"><div class="mock-dialog"><div class="mock-title">Access Restricted</div><div class="mock-text">Possible inspection activity detected.</div><div class="mock-btn">Reload page</div></div></div></div><h3>Overlay</h3><p>Accessible modal dialog with a reload button. Focus is contained, siblings become inert, SPA state is preserved.</p><code>action: 'overlay'</code></div>
-          <div class="action-card"><div class="action-visual action-block"><div class="action-mock"><div class="mock-dialog mock-block"><div class="mock-title">Access Restricted</div><div class="mock-text">Interaction blocked.</div></div></div></div><h3>Block</h3><p>Full-screen blocking layer without a reload button. Prevents interaction without destroying application DOM or state.</p><code>action: 'block'</code></div>
-          <div class="action-card"><div class="action-visual action-redirect"><div class="action-mock"><div class="mock-redirect"><span>→ /security-blocked</span></div></div></div><h3>Redirect</h3><p>Same-origin <code>location.replace()</code> to a safe destination. HTTP(S) only, credentials rejected, no redirect loops.</p><code>action: { type: 'redirect', url: '/blocked' }</code></div>
-          <div class="action-card"><div class="action-visual action-callback"><div class="action-mock"><div class="mock-callback"><span>handler(event)</span><span class="mock-arrow">→</span><span>your code</span></div></div></div><h3>Callback</h3><p>Monitoring-only mode. Receive detection events without any SDK layer. Perfect for logging, analytics, or custom UI.</p><code>action: { type: 'callback', handler }</code></div>
+          <div class="action-card"><div class="action-visual"><div class="mock-dialog"><div class="mock-title">Access Restricted</div><div class="mock-text">Possible inspection activity detected.</div><div class="mock-btn">Reload page</div></div></div><h3>Overlay</h3><p>Accessible modal dialog with a reload button. Focus is contained, siblings become inert, SPA state is preserved.</p><code>action: 'overlay'</code></div>
+          <div class="action-card"><div class="action-visual"><div class="mock-dialog mock-block"><div class="mock-title">Access Restricted</div><div class="mock-text">Interaction blocked.</div></div></div><h3>Block</h3><p>Full-screen blocking layer without a reload button. Prevents interaction without destroying application DOM or state.</p><code>action: 'block'</code></div>
+          <div class="action-card"><div class="action-visual"><div class="mock-redirect"><span>→ /security-blocked</span></div></div><h3>Redirect</h3><p>Same-origin <code>location.replace()</code> to a safe destination. HTTP(S) only, credentials rejected, no redirect loops.</p><code>action: { type: 'redirect', url: '/blocked' }</code></div>
+          <div class="action-card"><div class="action-visual"><div class="mock-callback"><span>handler(event)</span><span class="mock-arrow">→</span><span>your code</span></div></div><h3>Callback</h3><p>Monitoring-only mode. Receive detection events without any SDK layer. Perfect for logging, analytics, or custom UI.</p><code>action: { type: 'callback', handler }</code></div>
         </div>
       </div>
     </section>
 
-    <section class="code-section" id="code">
+    <!-- Code -->
+    <section class="section code-section" id="code">
       <div class="container">
-        <p class="section-eyebrow">INTEGRATION</p>
-        <h2 class="section-title">One import. Any framework.</h2>
+        <div class="section-header">
+          <p class="section-eyebrow">INTEGRATION</p>
+          <h2 class="section-title">One import.<br />Any framework.</h2>
+        </div>
         <div class="code-tabs">
           <div class="tab-bar"><button class="tab active" data-tab="vanilla">Vanilla JS</button><button class="tab" data-tab="react">React</button><button class="tab" data-tab="nextjs">Next.js</button><button class="tab" data-tab="vue">Vue</button></div>
           <div class="tab-content active" data-content="vanilla"><pre><code><span class="kw">import</span> SecurityGuard <span class="kw">from</span> <span class="str">'@0xzahed/security-guard'</span>;
@@ -174,11 +191,14 @@ guard.<span class="fn">stop</span>();</code></pre></div>
       </div>
     </section>
 
-    <section class="demo" id="demo">
+    <!-- Demo -->
+    <section class="section demo" id="demo">
       <div class="container">
-        <p class="section-eyebrow">LIVE DEMO</p>
-        <h2 class="section-title">See it in action.</h2>
-        <p class="section-sub">This is a real SecurityGuard instance running in your browser. Start the guard, try inspection shortcuts, resize the window — watch the signals respond.</p>
+        <div class="section-header">
+          <p class="section-eyebrow">LIVE DEMO</p>
+          <h2 class="section-title">See it in action.</h2>
+          <p class="section-sub">This is a real SecurityGuard instance running in your browser. Start the guard, try inspection shortcuts, resize the window — watch the signals respond.</p>
+        </div>
         <div class="demo-console">
           <div class="demo-header">
             <div class="demo-dots"><span></span><span></span><span></span></div>
@@ -218,7 +238,8 @@ guard.<span class="fn">stop</span>();</code></pre></div>
       </div>
     </section>
 
-    <section class="honesty">
+    <!-- Honesty -->
+    <section class="section honesty">
       <div class="container">
         <div class="honesty-card">
           <div class="honesty-icon">!</div>
@@ -229,10 +250,13 @@ guard.<span class="fn">stop</span>();</code></pre></div>
       </div>
     </section>
 
-    <section class="api-ref" id="api">
+    <!-- API -->
+    <section class="section api-ref" id="api">
       <div class="container">
-        <p class="section-eyebrow">API REFERENCE</p>
-        <h2 class="section-title">Small surface. Full control.</h2>
+        <div class="section-header">
+          <p class="section-eyebrow">API REFERENCE</p>
+          <h2 class="section-title">Small surface.<br />Full control.</h2>
+        </div>
         <div class="api-grid">
           <div class="api-item"><code>start(config?)</code><p>Replace configuration and start monitoring. Returns the instance.</p></div>
           <div class="api-item"><code>stop()</code><p>Complete teardown — listeners, timers, reports, layers.</p></div>
@@ -246,11 +270,12 @@ guard.<span class="fn">stop</span>();</code></pre></div>
       </div>
     </section>
 
+    <!-- Footer -->
     <footer class="footer">
       <div class="container">
         <div class="footer-grid">
           <div class="footer-brand">
-            <div class="brand"><span class="brand-mark">S</span><span>SecurityGuard</span></div>
+            <div class="brand"><span class="brand-mark">S</span><span class="brand-text">SecurityGuard</span></div>
             <p>Client-side anti-inspection and security monitoring for web applications.</p>
           </div>
           <div class="footer-links">

@@ -1,12 +1,16 @@
 import { createSecurityGuard, type SecurityAction, type SecurityGuardConfig, type Sensitivity } from '@0xzahed/security-guard';
 
-/* ---------- Nav toggle ---------- */
-const navToggle = document.querySelector<HTMLButtonElement>('.nav-toggle')!;
-const navLinks = document.querySelector<HTMLElement>('.nav-links')!;
+/* ---------- Nav toggle + scroll ---------- */
+const navToggle = document.querySelector<HTMLButtonElement>('#nav-toggle')!;
+const navLinks = document.querySelector<HTMLElement>('#nav-links')!;
+const nav = document.querySelector<HTMLElement>('#nav')!;
 navToggle.addEventListener('click', () => {
   const open = navLinks.classList.toggle('open');
   navToggle.setAttribute('aria-expanded', String(open));
 });
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+}, { passive: true });
 
 /* ---------- Code tabs ---------- */
 const tabs = document.querySelectorAll<HTMLButtonElement>('.tab');
@@ -60,7 +64,7 @@ function render(): void {
   el('demo-lifecycle').textContent = status.lifecycle;
   const state = el('demo-state');
   state.textContent = status.state[0]!.toUpperCase() + status.state.slice(1);
-  state.style.color = status.state === 'blocked' ? '#f79696' : status.state === 'suspicious' ? '#e6c17f' : '#9ce3c0';
+  state.style.color = status.state === 'blocked' ? '#f87171' : status.state === 'suspicious' ? '#fbbf24' : '#64ffda';
   el('demo-score').replaceChildren(document.createTextNode(String(status.score)), Object.assign(document.createElement('span'), { textContent: '%' }));
   el('demo-score-ring').style.setProperty('--score', String(status.score));
   el('demo-detail').textContent = status.lifecycle !== 'running' ? 'Start the guard to begin monitoring.' : status.detected ? 'Detection confirmed.' : status.score ? 'Evidence observed.' : 'No suspicious evidence.';
@@ -104,18 +108,18 @@ el('demo-preview').addEventListener('click', () => {
     layer.dataset.securityGuard = previewAction === 'block' ? 'block' : 'overlay';
     layer.setAttribute('role', 'alertdialog');
     layer.setAttribute('aria-modal', 'true');
-    layer.style.cssText = 'position:fixed;inset:0;margin:0;width:100vw;height:100dvh;max-width:none;max-height:none;border:0;padding:clamp(24px,8vw,80px);background:#0c1426;color:#f4f7ff;z-index:2147483647;font:16px/1.6 system-ui,sans-serif;overflow:auto;text-align:center;';
+    layer.style.cssText = 'position:fixed;inset:0;margin:0;width:100vw;height:100dvh;max-width:none;max-height:none;border:0;padding:clamp(24px,8vw,80px);background:#0a0e14;color:#e6edf3;z-index:2147483647;font:16px/1.6 system-ui,sans-serif;overflow:auto;text-align:center;';
     const title = document.createElement('h2');
     title.textContent = 'Access Restricted';
-    title.style.cssText = 'font-size:clamp(22px,4vw,36px);margin:15vh auto 16px;max-width:560px;';
+    title.style.cssText = 'font-size:clamp(22px,4vw,36px);margin:15vh auto 16px;max-width:560px;color:#64ffda;font-weight:800;';
     const msg = document.createElement('p');
     msg.textContent = 'This is a preview of the security overlay action.';
-    msg.style.cssText = 'max-width:440px;margin:0 auto 24px;color:#c7d3ea;';
+    msg.style.cssText = 'max-width:440px;margin:0 auto 24px;color:#8b98a8;';
     layer.append(title, msg);
     if (previewAction !== 'block') {
       const btn = document.createElement('button');
       btn.textContent = 'Close preview';
-      btn.style.cssText = 'background:#b9d9ff;color:#101a2d;border:0;border-radius:8px;padding:12px 22px;font:600 15px system-ui;cursor:pointer;';
+      btn.style.cssText = 'background:#64ffda;color:#0a0e14;border:0;border-radius:8px;padding:12px 22px;font:700 15px system-ui;cursor:pointer;';
       btn.addEventListener('click', endPreview);
       layer.append(btn);
     }
