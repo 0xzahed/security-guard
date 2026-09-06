@@ -1,4 +1,4 @@
-import { createSecurityGuard, type SecurityAction, type SecurityGuardConfig, type Sensitivity } from '@0xzahed/security-guard';
+import { createSecurityGuard, type SecurityAction, type SecurityGuardConfig, type Sensitivity } from '@0xzahed/devtoolguard';
 
 /* ---------- Nav: toggle, scroll, scroll-spy ---------- */
 const navToggle = document.querySelector<HTMLButtonElement>('#nav-toggle')!;

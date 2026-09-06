@@ -1,5 +1,5 @@
 {
-  "name": "@0xzahed/security-guard",
+  "name": "@0xzahed/devtoolguard",
   "version": "1.0.2",
   "description": "Client-side DevTools detection and anti-inspection security SDK for web applications",
   "type": "module",

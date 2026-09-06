@@ -41,7 +41,7 @@ This is NOT a security boundary. Browsers have no "DevTools is open" API. Determ
 
 **Tech stack:** TypeScript, tsup, Vitest, Vite, jsdom, Playwright
 
-📦 npm: https://www.npmjs.com/package/@0xzahed/security-guard
+📦 npm: https://www.npmjs.com/package/@0xzahed/devtoolguard
 🐙 GitHub: https://github.com/0xzahed/security-guard
 🚀 Live demo: https://landing-sepia-one-49.vercel.app
 
@@ -80,7 +80,7 @@ This is NOT a security boundary. Browsers have no "DevTools is open" API. Determ
 
 ## Short Version (for Twitter/X)
 
-Published @0xzahed/security-guard on npm — a client-side DevTools detection SDK for web apps.
+Published @0xzahed/devtoolguard on npm — a client-side DevTools detection SDK for web apps.
 
 4 independent detectors → confidence score → configurable actions (overlay/block/redirect/callback)
 
@@ -91,7 +91,7 @@ Published @0xzahed/security-guard on npm — a client-side DevTools detection SD
 
 No single signal can trigger. Two categories required. Honest about limitations.
 
-npm: https://www.npmjs.com/package/@0xzahed/security-guard
+npm: https://www.npmjs.com/package/@0xzahed/devtoolguard
 GitHub: https://github.com/0xzahed/security-guard
 Demo: https://landing-sepia-one-49.vercel.app
 

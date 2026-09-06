@@ -9,7 +9,7 @@
     "preview": "vite preview --host 127.0.0.1 --port 5174"
   },
   "dependencies": {
-    "@0xzahed/security-guard": "^1.0.0"
+    "@0xzahed/devtoolguard": "^1.0.2"
   },
   "devDependencies": {
     "vite": "6.4.3"
