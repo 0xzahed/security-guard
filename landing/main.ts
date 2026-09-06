@@ -62,8 +62,7 @@ function el<T extends HTMLElement>(id: string): T {
 const guard = createSecurityGuard();
 const sensitivity = el<HTMLSelectElement>('demo-sensitivity');
 const action = el<HTMLSelectElement>('demo-action');
-let eventCount = 0;
-let previewGuard: ReturnType<typeof createSecurityGuard> | undefined;
+let previewGuard: { stop: () => void } | undefined;
 let previewTimer: ReturnType<typeof setTimeout> | undefined;
 
 function log(msg: string): void {
@@ -121,7 +120,7 @@ el('demo-start').addEventListener('click', () => { guard.start(config()); log('G
 el('demo-stop').addEventListener('click', () => { guard.stop(); endPreview(); log('Guard stopped.'); render(); });
 el('demo-pause').addEventListener('click', () => { guard.pause(); log('Paused.'); render(); });
 el('demo-resume').addEventListener('click', () => { guard.resume(); log('Resumed.'); render(); });
-el('demo-reset').addEventListener('click', () => { guard.stop(); endPreview(); el('demo-activity').replaceChildren(); eventCount = 0; log('Reset.'); render(); });
+el('demo-reset').addEventListener('click', () => { guard.stop(); endPreview(); el('demo-activity').replaceChildren(); log('Reset.'); render(); });
 for (const c of [sensitivity, action]) c.addEventListener('change', () => { if (guard.getStatus().lifecycle !== 'stopped') guard.start(config()); render(); });
 el('demo-preview').addEventListener('click', () => {
   endPreview();
@@ -153,7 +152,7 @@ el('demo-preview').addEventListener('click', () => {
     }
     document.body.append(layer);
     if (typeof layer.showModal === 'function') layer.showModal(); else layer.setAttribute('open', '');
-    previewGuard = { stop: () => layer.remove() } as any;
+    previewGuard = { stop: () => layer.remove() };
   }
   previewTimer = setTimeout(() => { endPreview(); log('Preview ended.'); render(); }, 6000);
 });

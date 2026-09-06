@@ -13,6 +13,6 @@ export function browser(): BrowserContext {
   return { window, document, now: () => Date.now(), clock: () => performance.now() };
 }
 
-export function observation(name: string, detected = true, confidence = 100): DetectionSignal {
-  return { name, detected, confidence: detected ? confidence : 0, timestamp: Date.now() };
+export function observation(name: string, detected = true, confidence = 100, timestamp: number = Date.now()): DetectionSignal {
+  return { name, detected, confidence: detected ? confidence : 0, timestamp };
 }

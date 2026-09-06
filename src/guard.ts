@@ -163,6 +163,16 @@ export class SecurityGuardInstance {
     this.onAvailability();
   }
 
+  /** Reset detection state and clear evidence without changing lifecycle or config. */
+  reset(): void {
+    this.revision++;
+    this.state.reset();
+    this.score = 0;
+    this.signals = [];
+    this.action?.cleanup();
+    this.action = undefined;
+  }
+
   /** Snapshot of lifecycle, current evidence and whether an SDK layer is blocking. */
   getStatus(): GuardStatus {
     return {

@@ -21,11 +21,11 @@ describe('scoring', () => {
 
   it('weights quality, caps confidence and ignores stale, future, unknown and invalid observations', () => {
     const now = Date.now();
-    expect(calculateScore([observation('dimension', true, 50), observation('debugger', true, 500)], config, now).score).toBe(50);
+    expect(calculateScore([observation('dimension', true, 50, now), observation('debugger', true, 500, now)], config, now).score).toBe(50);
     const invalid = [
-      { ...observation('dimension'), timestamp: now - 10001 },
-      { ...observation('debugger'), timestamp: now + 1 },
-      observation('keyboard', false), observation('behavior', true, NaN), observation('unknown'), observation('toString'),
+      { ...observation('dimension', true, 100, now), timestamp: now - 10001 },
+      { ...observation('debugger', true, 100, now), timestamp: now + 1 },
+      observation('keyboard', false, 0, now), observation('behavior', true, NaN, now), observation('unknown', true, 100, now), observation('toString', true, 100, now),
     ];
     expect(calculateScore(invalid, config, now)).toMatchObject({ score: 0, confirmed: false });
   });
