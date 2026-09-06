@@ -14,9 +14,7 @@ Node.js 20+ is required for package tooling. Use a currently supported Node LTS 
 npm install @0xzahed/security-guard
 ```
 
-The package is published under the npm scope `@0xzahed`. Before publishing, change it to a scope you own. Until published, install a local tarball with `npm pack` followed by `npm install /absolute/path/to/0xzahed-security-guard-1.0.0.tgz`.
-
-ES modules, CommonJS, source maps, and TypeScript declarations are included. The package has no runtime dependencies. Browser bundlers can tree-shake ESM exports. Standalone detectors and scoring are available through `/detectors` and `/scoring` subpaths.
+The package is published under the npm scope `@0xzahed`. ESM, CommonJS, source maps, and TypeScript declarations are included. The package has no runtime dependencies. Browser bundlers can tree-shake ESM exports. Standalone detectors and scoring are available through `/detectors` and `/scoring` subpaths.
 
 ## Quick start / Vanilla JavaScript
 
@@ -436,6 +434,7 @@ Both the default singleton and `createSecurityGuard()` instances provide:
 - `stop(): void`: complete native teardown and score/state reset. Idempotent.
 - `pause(): void`: suspend, clear evidence, abort reports and remove layers; preserve configuration/subscribers/cooldown. No-op unless running.
 - `resume(): void`: restart observation only from paused, with fresh evidence.
+- `reset(): void`: clear detection state, score, evidence and remove any active action layer without changing lifecycle or configuration. Safe to call in any lifecycle state.
 - `getStatus(): GuardStatus`: copied `{ lifecycle, state, detected, score, signals }`. Lifecycle is `stopped | running | paused | unsupported`; state is `normal | suspicious | blocked`. `blocked` means an SDK layer is owned, not that all browser access is prevented. A high unconfirmed score is `suspicious`.
 - `getScore(): number`: latest 0–100 heuristic score. Background/paused/stopped evidence is reset to 0.
 - `on(name, handler): () => void`: subscribe to `detected | cleared | violation`, return unsubscribe. Identical handler registrations on one channel are deduplicated.
