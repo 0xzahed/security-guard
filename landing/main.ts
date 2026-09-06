@@ -1,16 +1,44 @@
 import { createSecurityGuard, type SecurityAction, type SecurityGuardConfig, type Sensitivity } from '@0xzahed/security-guard';
 
-/* ---------- Nav toggle + scroll ---------- */
+/* ---------- Nav: toggle, scroll, scroll-spy ---------- */
 const navToggle = document.querySelector<HTMLButtonElement>('#nav-toggle')!;
 const navLinks = document.querySelector<HTMLElement>('#nav-links')!;
 const nav = document.querySelector<HTMLElement>('#nav')!;
+const navLinkEls = document.querySelectorAll<HTMLAnchorElement>('.nav-links > a[data-nav]');
+
 navToggle.addEventListener('click', () => {
   const open = navLinks.classList.toggle('open');
+  navToggle.classList.toggle('open', open);
   navToggle.setAttribute('aria-expanded', String(open));
 });
-window.addEventListener('scroll', () => {
+
+// Close mobile menu on link click
+for (const link of navLinkEls) {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    navToggle.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  });
+}
+
+// Scroll: nav background + active section highlight
+const sections = ['features', 'signals', 'actions', 'code', 'demo', 'api']
+  .map(id => document.getElementById(id))
+  .filter((el): el is HTMLElement => el !== null);
+
+function onScroll(): void {
   nav.classList.toggle('scrolled', window.scrollY > 20);
-}, { passive: true });
+  const scrollPos = window.scrollY + 100;
+  let activeId = '';
+  for (const section of sections) {
+    if (section.offsetTop <= scrollPos) activeId = section.id;
+  }
+  for (const link of navLinkEls) {
+    link.classList.toggle('active', link.dataset.nav === activeId);
+  }
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
 
 /* ---------- Code tabs ---------- */
 const tabs = document.querySelectorAll<HTMLButtonElement>('.tab');
