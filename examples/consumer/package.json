@@ -13,7 +13,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@yourname/security-guard": "file:../../yourname-security-guard-1.0.0.tgz",
+    "@0xzahed/security-guard": "file:../../0xzahed-security-guard-1.0.0.tgz",
     "next": "15.5.24",
     "react": "19.0.8",
     "react-dom": "19.0.8"

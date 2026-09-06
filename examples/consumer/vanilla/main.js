@@ -1,6 +1,6 @@
-import SecurityGuard, { createSecurityGuard } from '@yourname/security-guard';
-import { calculateScore } from '@yourname/security-guard/scoring';
-import { DimensionDetector } from '@yourname/security-guard/detectors';
+import SecurityGuard, { createSecurityGuard } from '@0xzahed/security-guard';
+import { calculateScore } from '@0xzahed/security-guard/scoring';
+import { DimensionDetector } from '@0xzahed/security-guard/detectors';
 
 const guard = createSecurityGuard();
 const render = () => { document.querySelector('#status').textContent = guard.getStatus().lifecycle; };

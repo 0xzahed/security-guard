@@ -1,5 +1,5 @@
 {
-  "name": "@yourname/security-guard",
+  "name": "@0xzahed/security-guard",
   "version": "1.0.0",
   "description": "Client-side DevTools detection and anti-inspection security SDK for web applications",
   "type": "module",

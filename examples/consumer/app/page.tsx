@@ -1,4 +1,4 @@
-import { createSecurityGuard } from '@yourname/security-guard';
+import { createSecurityGuard } from '@0xzahed/security-guard';
 import Monitor from './monitor';
 
 export default function Page() {

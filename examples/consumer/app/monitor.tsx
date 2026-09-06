@@ -1,7 +1,7 @@
 'use client';
 
 import { StrictMode, useEffect, useState } from 'react';
-import { createSecurityGuard, type GuardStatus } from '@yourname/security-guard';
+import { createSecurityGuard, type GuardStatus } from '@0xzahed/security-guard';
 
 function ClientMonitor() {
   const [status, setStatus] = useState<GuardStatus['lifecycle']>('stopped');

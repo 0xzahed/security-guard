@@ -11,10 +11,10 @@ SecurityGuard combines ambiguous browser signals into a configurable score, requ
 Node.js 20+ is required for package tooling. Use a currently supported Node LTS release when possible.
 
 ```bash
-npm install @yourname/security-guard
+npm install @0xzahed/security-guard
 ```
 
-The repository uses the requested npm scope `@yourname`. Before publishing, change it to a scope you own. Until published, install a local tarball with `npm pack` followed by `npm install /absolute/path/to/yourname-security-guard-1.0.0.tgz`.
+The package is published under the npm scope `@0xzahed`. Before publishing, change it to a scope you own. Until published, install a local tarball with `npm pack` followed by `npm install /absolute/path/to/0xzahed-security-guard-1.0.0.tgz`.
 
 ES modules, CommonJS, source maps, and TypeScript declarations are included. The package has no runtime dependencies. Browser bundlers can tree-shake ESM exports. Standalone detectors and scoring are available through `/detectors` and `/scoring` subpaths.
 
@@ -23,7 +23,7 @@ ES modules, CommonJS, source maps, and TypeScript declarations are included. The
 In a Vite, webpack, or other bundled browser entry:
 
 ```ts
-import SecurityGuard from '@yourname/security-guard';
+import SecurityGuard from '@0xzahed/security-guard';
 
 const guard = SecurityGuard.start({
   devtools: true,
@@ -38,7 +38,7 @@ For a plain unbundled site, copy **all** ESM files from `dist`, retaining their 
 For initial rollout, use a callback to evaluate false positives before enabling blocking actions:
 
 ```ts
-import { createSecurityGuard } from '@yourname/security-guard';
+import { createSecurityGuard } from '@0xzahed/security-guard';
 
 const guard = createSecurityGuard().start({
   action: {
@@ -55,7 +55,7 @@ guard.stop();
 ## Configuration
 
 ```ts
-import SecurityGuard, { type SecurityGuardConfig } from '@yourname/security-guard';
+import SecurityGuard, { type SecurityGuardConfig } from '@0xzahed/security-guard';
 
 const config = {
   devtools: { enabled: true, threshold: 60, interval: 1000 },
@@ -164,8 +164,8 @@ Structured signals
 Debugger 40 + behavior 25 contributes **40**, not 65. Dimension 20 + debugger 40 contributes 60. Setting dimension weight to 100 still cannot confirm it alone. Categories are conceptual safeguards, not a claim of statistical independence.
 
 ```ts
-import { calculateScore } from '@yourname/security-guard/scoring';
-import { resolveConfig } from '@yourname/security-guard';
+import { calculateScore } from '@0xzahed/security-guard/scoring';
+import { resolveConfig } from '@0xzahed/security-guard';
 
 const now = Date.now();
 const result = calculateScore([
@@ -175,7 +175,7 @@ const result = calculateScore([
 console.info(result.score, result.confirmed); // 60, true
 ```
 
-Detector constructors are exported from `@yourname/security-guard/detectors` for focused use and testing. Supply a browser context at runtime, call `start()`, periodically `sample()`, then `stop()`. V1's managed guard supports the four built-in names; custom plugins are not accepted by `start()`. Additional detectors can be developed against the exported `Detector` interface and incorporated into a custom orchestration/scoring layer without modifying the built-ins.
+Detector constructors are exported from `@0xzahed/security-guard/detectors` for focused use and testing. Supply a browser context at runtime, call `start()`, periodically `sample()`, then `stop()`. V1's managed guard supports the four built-in names; custom plugins are not accepted by `start()`. Additional detectors can be developed against the exported `Detector` interface and incorporated into a custom orchestration/scoring layer without modifying the built-ins.
 
 ## Actions
 
@@ -234,7 +234,7 @@ const unsubscribe = SecurityGuard.on('detected', event => {
   console.info(event.type, event.confidence);
 });
 
-const onCleared = (event: import('@yourname/security-guard').SecurityEvent) => {
+const onCleared = (event: import('@0xzahed/security-guard').SecurityEvent) => {
   console.info('Heuristic episode ended:', event.timestamp);
 };
 SecurityGuard.on('cleared', onCleared);
@@ -303,7 +303,7 @@ Use an isolated instance inside an effect; cleanup works with React Strict Mode'
 
 ```tsx
 import { useEffect } from 'react';
-import { createSecurityGuard } from '@yourname/security-guard';
+import { createSecurityGuard } from '@0xzahed/security-guard';
 
 export function SecurityMonitor() {
   useEffect(() => {
@@ -326,7 +326,7 @@ Mount this once near your application root. No React runtime dependency is bundl
 'use client';
 
 import { useEffect } from 'react';
-import { createSecurityGuard } from '@yourname/security-guard';
+import { createSecurityGuard } from '@0xzahed/security-guard';
 
 export default function SecurityMonitor() {
   useEffect(() => {
@@ -359,7 +359,7 @@ The SDK may safely be imported during SSR, but initialization belongs in a clien
 ```vue
 <script setup lang="ts">
 import { onMounted, onUnmounted } from 'vue';
-import { createSecurityGuard } from '@yourname/security-guard';
+import { createSecurityGuard } from '@0xzahed/security-guard';
 
 const guard = createSecurityGuard();
 onMounted(() => guard.start({ action: 'overlay' }));
@@ -376,7 +376,7 @@ In Angular, start after browser view initialization and call `stop()` in `ngOnDe
 All configuration, events and status fields are exported. Strict TypeScript and declaration files are included for ESM and CJS.
 
 ```ts
-import { createSecurityGuard, type SecurityGuardConfig, type SecurityEvent } from '@yourname/security-guard';
+import { createSecurityGuard, type SecurityGuardConfig, type SecurityEvent } from '@0xzahed/security-guard';
 
 function observe(event: SecurityEvent): void {
   console.info(event.type, event.confidence);
@@ -394,7 +394,7 @@ guard.stop();
 CommonJS:
 
 ```js
-const { default: SecurityGuard, createSecurityGuard } = require('@yourname/security-guard');
+const { default: SecurityGuard, createSecurityGuard } = require('@0xzahed/security-guard');
 const guard = createSecurityGuard();
 SecurityGuard.stop();
 guard.stop();
