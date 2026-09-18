@@ -7,11 +7,17 @@ export interface BrowserContext {
 
 export function getBrowserContext(): BrowserContext | undefined {
   if (typeof window === 'undefined' || typeof document === 'undefined') return undefined;
-  return { window, document, now: () => Date.now(), clock: () => window.performance.now() };
+  return {
+    window,
+    document,
+    now: () => Date.now(),
+    clock: () => (typeof window.performance?.now === 'function' ? window.performance.now() : Date.now()),
+  };
 }
 
 export function isForeground(context: BrowserContext): boolean {
-  return context.document.visibilityState === 'visible' && context.document.hasFocus();
+  const focused = typeof context.document.hasFocus === 'function' ? context.document.hasFocus() : true;
+  return context.document.visibilityState === 'visible' && focused;
 }
 
 export function safeHttpUrl(value: string, context: BrowserContext, crossOrigin = false): URL {

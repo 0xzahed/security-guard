@@ -63,7 +63,7 @@ describe('keyboard detector', () => {
     window.dispatchEvent(new KeyboardEvent('keydown', { key: 'F12' }));
     expect(detector.sample().detected).toBe(false);
     const listener = add.mock.calls.find(([name]) => name === 'keydown')?.[1] as (event: KeyboardEvent) => void;
-    for (const input of [{ key: 'a' }, { key: 'F12', repeat: true }, { key: 'F12', isComposing: true }, { key: 'F12', altKey: true }]) {
+    for (const input of [{ key: 'a' }, { key: undefined as unknown as string }, { key: 'F12', repeat: true }, { key: 'F12', isComposing: true }, { key: 'F12', altKey: true }]) {
       listener({ ...input, isTrusted: true } as unknown as KeyboardEvent);
       expect(detector.sample().detected).toBe(false);
     }

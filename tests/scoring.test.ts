@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { calculateScore, DetectionState } from '../src/scoring';
+import { calculateScore, DetectionState, type ScoreOptions } from '../src/scoring';
 import { resolveConfig } from '../src/config';
+import type { DetectionSignal } from '../src/types';
 import { observation } from './helpers';
 
 const config = resolveConfig();
@@ -32,6 +33,13 @@ describe('scoring', () => {
 
   it('zero weights cannot satisfy evidence diversity', () => {
     expect(calculateScore([observation('dimension'), observation('keyboard')], { ...config, threshold: 1, weights: { ...config.weights, keyboard: 0 } }).confirmed).toBe(false);
+  });
+
+  it('safely handles nullish and non-array signals or options', () => {
+    expect(calculateScore(null as unknown as readonly DetectionSignal[], config)).toEqual({ score: 0, confirmed: false, groups: [] });
+    expect(calculateScore(undefined as unknown as readonly DetectionSignal[], config)).toEqual({ score: 0, confirmed: false, groups: [] });
+    expect(calculateScore([null, undefined] as unknown as readonly DetectionSignal[], config)).toEqual({ score: 0, confirmed: false, groups: [] });
+    expect(calculateScore([], null as unknown as ScoreOptions)).toEqual({ score: 0, confirmed: false, groups: [] });
   });
 });
 

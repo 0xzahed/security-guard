@@ -1,11 +1,20 @@
 {
   "name": "@0xzahed/devtoolguard",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Client-side DevTools detection and anti-inspection security SDK for web applications",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "author": "0xzahed",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0xzahed/security-guard.git"
+  },
+  "bugs": {
+    "url": "https://github.com/0xzahed/security-guard/issues"
+  },
+  "homepage": "https://github.com/0xzahed/security-guard#readme",
   "exports": {
     ".": {
       "import": {
@@ -41,7 +50,9 @@
   "files": [
     "dist",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "CHANGELOG.md",
+    "SECURITY.md"
   ],
   "sideEffects": false,
   "engines": {

@@ -17,10 +17,11 @@ const groups: Record<DetectorName, EvidenceGroup> = {
 };
 
 /** Sum the strongest contribution per evidence category; require at least two independent categories. */
-export function calculateScore(signals: readonly DetectionSignal[], options: ScoreOptions, now = Date.now()): ScoreResult {
+export function calculateScore(signals: readonly DetectionSignal[] = [], options: ScoreOptions, now = Date.now()): ScoreResult {
   const contributions = new Map<EvidenceGroup, number>();
+  if (!Array.isArray(signals) || !options?.weights) return { score: 0, confirmed: false, groups: [] };
   for (const signal of signals) {
-    if (!Object.hasOwn(groups, signal.name) || !signal.detected || !Number.isFinite(signal.confidence)) continue;
+    if (!signal || typeof signal !== 'object' || !Object.hasOwn(groups, signal.name) || !signal.detected || !Number.isFinite(signal.confidence)) continue;
     const age = now - signal.timestamp;
     if (!Number.isFinite(age) || age < 0 || age > options.signalTtl) continue;
     const name = signal.name as DetectorName;

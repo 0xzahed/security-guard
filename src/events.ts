@@ -1,7 +1,7 @@
 import type { EventHandler, EventName, SecurityEvent } from './types';
 
 export function copyEvent(event: SecurityEvent): SecurityEvent {
-  return { ...event, signals: event.signals.map(signal => ({ ...signal, ...(signal.metadata ? { metadata: { ...signal.metadata } } : {}) })) };
+  return { ...event, signals: (event?.signals ?? []).map(signal => ({ ...signal, ...(signal?.metadata ? { metadata: { ...signal.metadata } } : {}) })) };
 }
 
 export function safelyInvoke(handler: EventHandler | undefined, event: SecurityEvent): void {

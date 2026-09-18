@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import SecurityGuard, { createSecurityGuard, type SecurityGuardInstance } from '../src';
+import SecurityGuard, { createDevToolGuard, createSecurityGuard, DevToolGuard, type SecurityGuardConfig, type SecurityGuardInstance } from '../src';
 import { BehaviorDetector, DebuggerDetector, DimensionDetector, KeyboardDetector } from '../src/detectors';
 import { browser, observation } from './helpers';
 
@@ -20,6 +20,13 @@ afterEach(() => {
 });
 
 describe('guard lifecycle', () => {
+  it('exports DevToolGuard and createDevToolGuard aliases', () => {
+    expect(DevToolGuard).toBe(SecurityGuard);
+    const instance = createDevToolGuard();
+    expect(instance).toBeInstanceOf(Object);
+    expect(typeof instance.start).toBe('function');
+  });
+
   it('supports singleton and independent instances with idempotent start/stop', () => {
     expect(SecurityGuard.start({ devtools: true })).toBe(SecurityGuard);
     const value = guard().start();
@@ -30,6 +37,9 @@ describe('guard lifecycle', () => {
     value.stop(); value.stop();
     expect(value.getStatus()).toMatchObject({ lifecycle: 'stopped', score: 0, signals: [] });
     expect(SecurityGuard.getStatus().lifecycle).toBe('running');
+    expect(() => value.start(null as unknown as SecurityGuardConfig)).not.toThrow();
+    expect(value.getStatus().lifecycle).toBe('running');
+    value.stop();
   });
 
   it('does not register observation when disabled', () => {

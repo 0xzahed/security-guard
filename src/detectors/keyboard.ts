@@ -10,7 +10,8 @@ export class KeyboardDetector implements Detector {
   private active = false;
   private readonly onKey = (event: KeyboardEvent): void => {
     if (!event.isTrusted || event.repeat || event.isComposing) return;
-    const key = event.key.toLowerCase();
+    const key = event.key?.toLowerCase();
+    if (!key) return;
     const f12 = key === 'f12' && !event.ctrlKey && !event.altKey && !event.metaKey && !event.shiftKey;
     const control = event.ctrlKey && event.shiftKey && !event.altKey && !event.metaKey && ['i', 'j', 'c'].includes(key);
     const command = event.metaKey && event.altKey && !event.ctrlKey && !event.shiftKey && ['i', 'j', 'c'].includes(key);

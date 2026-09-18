@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { resolveConfig } from '../src/config';
-import type { SecurityGuardConfig } from '../src/types';
+import type { DetectorName, SecurityAction, SecurityGuardConfig } from '../src/types';
 
 describe('configuration', () => {
   it('has conservative, independent defaults', () => {
@@ -31,6 +31,32 @@ describe('configuration', () => {
     expect(() => resolveConfig({ sensitivity: 'unknown' } as unknown as SecurityGuardConfig)).toThrow();
     expect(() => resolveConfig({ action: { type: 'callback' } } as SecurityGuardConfig)).toThrow();
     expect(() => resolveConfig({ action: 'unknown' } as unknown as SecurityGuardConfig)).toThrow();
+    expect(() => resolveConfig({ action: 'redirect' as unknown as SecurityAction })).toThrow(TypeError);
+    expect(() => resolveConfig({ action: 'callback' as unknown as SecurityAction })).toThrow(TypeError);
+    expect(() => resolveConfig({ action: { type: 'redirect', url: '' } })).toThrow(TypeError);
+    expect(() => resolveConfig({ action: { type: 'redirect', url: 123 as unknown as string } })).toThrow(TypeError);
+    expect(() => resolveConfig({ scoring: { weights: { unknown: 50 } as unknown as Partial<Record<DetectorName, number>> } })).toThrow(TypeError);
+  });
+
+  it('handles null or undefined config and devtools safely', () => {
+    expect(resolveConfig(null as unknown as SecurityGuardConfig)).toMatchObject({ enabled: true, sensitivity: 'medium' });
+    expect(resolveConfig(undefined)).toMatchObject({ enabled: true, sensitivity: 'medium' });
+    expect(resolveConfig({ devtools: null } as unknown as SecurityGuardConfig)).toMatchObject({ enabled: true, interval: 1000 });
+  });
+
+  it('supports boolean shorthands for detector enablement', () => {
+    expect(resolveConfig({ keyboard: false }).keyboard).toBe(false);
+    expect(resolveConfig({ keyboard: true }).keyboard).toBe(true);
+    expect(resolveConfig({ debugger: true }).debugger.enabled).toBe(true);
+    expect(resolveConfig({ debugger: false }).debugger.enabled).toBe(false);
+    expect(resolveConfig({ behavior: false }).behavior.enabled).toBe(false);
+    expect(resolveConfig({ behavior: true }).behavior.enabled).toBe(true);
+  });
+
+  it('validates reporting endpoint is a non-empty string', () => {
+    expect(() => resolveConfig({ reporting: { endpoint: '' } })).toThrow(TypeError);
+    expect(() => resolveConfig({ reporting: { endpoint: '   ' } })).toThrow(TypeError);
+    expect(() => resolveConfig({ reporting: { endpoint: 123 as unknown as string } })).toThrow(TypeError);
   });
 
   it('copies caller configuration and keeps defaults isolated', () => {

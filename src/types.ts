@@ -55,9 +55,9 @@ export interface ReportingConfig {
 /** All detection is heuristic. Keep authorization and credentials on the server. */
 export interface SecurityGuardConfig {
   devtools?: boolean | { enabled?: boolean; threshold?: number; interval?: number };
-  debugger?: { enabled?: boolean; interval?: number; delayThreshold?: number };
-  keyboard?: { enabled?: boolean };
-  behavior?: { enabled?: boolean; delayThreshold?: number };
+  debugger?: boolean | { enabled?: boolean; interval?: number; delayThreshold?: number };
+  keyboard?: boolean | { enabled?: boolean };
+  behavior?: boolean | { enabled?: boolean; delayThreshold?: number };
   sensitivity?: Sensitivity;
   scoring?: { threshold?: number; weights?: Partial<Record<DetectorName, number>> };
   debounce?: number;

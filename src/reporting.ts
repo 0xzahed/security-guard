@@ -46,6 +46,6 @@ export class Reporter {
   }
 
   stop(): void {
-    for (const controller of this.pending.keys()) { controller.abort(); this.finish(controller); }
+    for (const controller of [...this.pending.keys()]) { controller.abort(); this.finish(controller); }
   }
 }
